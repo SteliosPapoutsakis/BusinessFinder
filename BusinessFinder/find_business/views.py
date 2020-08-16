@@ -13,7 +13,7 @@ def index(request):
     companies_dict = {
         'companies': companies,
         'lat': 45.5732,
-        'lon': 122.7276
+        'lon': -122.7276
     }
     return render(request, 'find_business/index.html', companies_dict)
 # Create your views here.
@@ -45,19 +45,23 @@ def business_query(request):
         if (valid_dict['type']):
             mytype = CompanyTypes[query_dict['type']]
             companies = companies.filter(type=mytype)
-        if (valid_dict['within'] & (query_dict['within'] != 0)):
+
+        if (valid_dict['within'] & (query_dict['within'] != '0')):
             dist = float(query_dict['within'])/COORDINATE_TO_MILES
+            print(dist)
             lat = float(query_dict['lat'])
             lon = float(query_dict['lon'])
             lat_max = lat + dist
             lat_min = lat - dist
             lon_max = lon + dist
             lon_min = lon - dist
+            print(str(lat) + ' ' + str(lon))
+            print(str(lat_max) + ' ' + str(lat_min) + ' ' + str(lon_max) + ' ' + str(lon_min))
             companies = companies.filter(
-                (Q(coordinatesLat__lte=lat_max) |
+                (Q(coordinatesLat__lte=lat_max) &
                 Q(coordinatesLat__gte=lat_min)) &
-                (Q(coordinatesLat__lte=lon_max) |
-                Q(coordinatesLat__gte=lon_min)))
+                (Q(coordinatesLon__lte=lon_max) &
+                Q(coordinatesLon__gte=lon_min)))
 
         print(companies.all())
 

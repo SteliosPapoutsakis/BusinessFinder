@@ -28,8 +28,8 @@ class Company(models.Model):
         default=datetime.datetime(2020, 8, 30, 6, 00, 00))
     end_time = models.TimeField(
         default=datetime.datetime(2020, 8, 30, 17, 0, 0))
-    coordinatesLon = models.FloatField(default=0.0)
     coordinatesLat = models.FloatField(default=0.0)
+    coordinatesLon = models.FloatField(default=0.0)
     description = models.TextField(default='', max_length=512)
     rating = models.FloatField(
         default=5.0,
