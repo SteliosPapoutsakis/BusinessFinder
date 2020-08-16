@@ -14,7 +14,7 @@
         <p>{{business.start_time}} - {{business.end_time}}</p>
       </div>
 
-      <div class="col-lg-4">
+      <div class="col-lg-3">
         <p>{{business.description}}</p> <!-- Description of businesses -->
       </div>
 
@@ -24,6 +24,12 @@
 
       <div class="col-lg-3">
         <p>{{business.activities}}</p> <!-- Safety Options of businesses  WHAT IS THIS ACTUALLY CALLED-->
+      </div>
+
+      {% load dist %}
+      <div class="col-lg-1">
+        {% findDistance lat lon business.coordinatesLat business.coordinatesLon as distance %}
+        <p>{{distance}}</p> <!-- Safety Options of businesses  WHAT IS THIS ACTUALLY CALLED-->
       </div>
 
     </div>
