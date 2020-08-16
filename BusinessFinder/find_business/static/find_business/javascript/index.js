@@ -62,8 +62,8 @@ function queryBusiness() {
 	let query = {
 		"type": $('#type').val(),
 		"search": $('#search').val(),
-		"lat": (lat)?lat:0.0,
-		"lon": (lon)?lon:0.0,
+		"lat": (lat)?lat:45.5732,
+		"lon": (lon)?lon:-122.7276,
 		"within": (lon || lat)?$('#within').val():0
 	};
 
