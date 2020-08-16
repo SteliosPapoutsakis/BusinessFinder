@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from django.http import HttpResponse, JsonResponse, Http404
 from django.template import loader
 
@@ -17,7 +16,14 @@ def business_query(request):
 
     if request.method == 'POST':
         print(request.POST)
-        data = {"test": "hello"}
-        return JsonResponse(data)
+        query_dict = {}
+        for company_attr in ('type','title','address'):
+            val = request.POST.get(company_attr)
+            if val:
+                query_dict[company_attr] = val
+
+        companies = Company.objects.filter(query_dict)
+
+        return JsonResponse(companies)
     else:
         raise Http404()
