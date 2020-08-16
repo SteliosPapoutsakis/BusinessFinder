@@ -43,7 +43,6 @@ $(document).ready(function() {
 		queryBusiness();
 	});
 
-	console.log('here');
 	//query to set locations on map
 	queryLocations();
 
@@ -128,8 +127,8 @@ function queryLocations() {
 			for (let i =0; i < names.length; i++) {
 				new google.maps.Marker({
 					position: {
-						lat: data[i][0],
-						lon: data[i][1]
+						lat: 74,
+						lon: -125
 					},
 					label: names[i],
 					map:map
@@ -142,7 +141,7 @@ function queryLocations() {
 //			alert('Error: '+errorThrown+'\nStatus:'+jqXHR.status);
 //		},
 		crossDomain: false,
-		data: JSON.Stringify(query),
+		data: query,
 	});
 }
 
