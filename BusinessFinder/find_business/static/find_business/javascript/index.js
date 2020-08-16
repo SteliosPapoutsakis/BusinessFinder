@@ -117,7 +117,7 @@ function queryLocations() {
 		},
 		// on success, replace new html list
 		success: (data) => {
-			console.(data);
+			console.log(data);
 
 
 		},

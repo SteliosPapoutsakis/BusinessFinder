@@ -25,7 +25,10 @@ def index(request):
     }
     return render(request, 'find_business/index.html', companies_dict)
 
-# Queries for a list of 
+# Queries for a list of businesses based on certain
+# search parameters, these parameters include the
+# company type, a search string and a within distance (mi)
+# as well as the users current location
 def business_query(request):
     '''
     returns result from client side query
@@ -84,8 +87,11 @@ def business_query(request):
     else:
         raise Http404()
 
+# Queries the database for all company names that are listed
+# and returns a list of tuples decribing the location of each company
+# that was requested
 def locations_query(request):
-    locations = {}
+    locations = []
     if request.method == 'POST':
         print(request.POST)
         names = request.POST.get('names')
@@ -95,5 +101,6 @@ def locations_query(request):
                 comp = companies[0]
                 locations.append((comp.locationLat, complocationLon))
             else:
-                locations.append(45.0, -122.0)
-    return JsonResponse(locations)
+                locations.append((45.0, -122.0))
+    print(locations)
+    return JsonResponse(locations, safe=False)
