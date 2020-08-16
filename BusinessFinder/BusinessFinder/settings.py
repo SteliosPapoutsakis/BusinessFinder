@@ -24,7 +24,10 @@ SECRET_KEY = 'ta0d(%_qf3v!92cr_)vl_(ib)&1)hh36__4zgfgm@kv)_7b2ui'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+        'businessfinder-286522.wl.r.appspot.com',
+        '127.0.0.1'
+]
 
 
 # Application definition
@@ -121,5 +124,5 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
+STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
