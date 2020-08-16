@@ -13,6 +13,12 @@ $(document).ready(() => {
 					navigator.geolocation.getCurrentPosition((position) => {
 						lon = position.coords.longitude;
 						lat = position.coords.latitude;
+						if (map) {
+  						  map.setCenter({
+								lat: lat,
+								lng: lon
+							});
+						}
 					});
 				} else {
 					alert('Geo location is not support by this browser');
@@ -23,11 +29,11 @@ $(document).ready(() => {
 	// set toggle for map button
 	$('#mapToggle').click(() => {
 		if ($('#mapToggle').text() == 'Map') {
-			$('#map-row').css('display','block');
+			$('#map').css('display','block');
 			$('.business-list').css('display', 'none');
 			$('#mapToggle').text('List');
 		} else if ($('#mapToggle').text() == 'List') {
-			$('#map-row').css('display','none');
+			$('#map').css('display','none');
 			$('.business-list').css('display', 'block');
 			$('#mapToggle').text('Map');
 		}
@@ -36,6 +42,10 @@ $(document).ready(() => {
 	$('#searchButton').click(() => {
 		queryBusiness();
 	});
+	
+	//query to set locations on map
+	queryLocations();
+
 });
 
 "use strict";
@@ -45,10 +55,10 @@ let map;
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: {
-      lat: -34.397,
-      lng: 150.644
+      lat: 45.5732,
+      lng: -122.7276
     },
-    zoom: 5
+    zoom: 8
   });
 }
 
@@ -78,6 +88,9 @@ function queryBusiness() {
 		success: (data) => {
 			$('#restaurantList').empty();
 			$('#restaurantList').append(data);
+
+			//query to set locations on map
+			queryLocations();
 		},
 		error: (jqXHR, textStatus,errorThrown ) => {
 			alert('Error: '+errorThrown+'\nStatus:'+jqXHR.status);
@@ -85,5 +98,35 @@ function queryBusiness() {
 		crossDomain: false,
 		data: query,
 	});
+}
+
+function queryLocations() {
+	let names = $('.busniess-name').text();
+	console.log(names);
+
+	let query = {
+		'names': names 
+	}
+	
+	$.ajax({
+		url: '/find_business/locations_query',
+		type: 'POST',
+		dataType: 'json',
+		headers: {
+			'X-CSRFToken': csrftoken,
+		},
+		// on success, replace new html list
+		success: (data) => {
+			console.(data);
+
+
+		},
+		error: (jqXHR, textStatus,errorThrown ) => {
+			alert('Error: '+errorThrown+'\nStatus:'+jqXHR.status);
+		},
+		crossDomain: false,
+		data: query,
+	});
+
 }
 

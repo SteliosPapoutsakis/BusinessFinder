@@ -7,7 +7,8 @@
 		</script>
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		{% load static %}
-		<script src="{% static "find_business/javascript/index.js" %}"></script>
+		<script src="{% static "find_business/javascript/index.js" %}
+"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -19,13 +20,20 @@
     ></script>
  </head>
   <body>
+	<style>
+ 	  #map {
+		  min-height:400px;
+		  min-width:400px;
+		  width:100%;
+		  height:100%;
+	  }
+	</style>
     <div class="container-fluid" style="width:100%;">
 
       <div class="jumbotron text-center">
         <h1>Welcome to Safe Business Finder!</h1>
       </div>
-	
-	  <div class="col-8">
+
       <div class="row">
 
         <div class="col-lg-2" >
@@ -68,7 +76,7 @@
       </div>
 
       <div class="col-lg-1"> <!-- Hours of businesses -->
-        <h5>Hours of Operation</h5>
+        <h5>Hours</h5>
       </div>
 
       <div class="col-lg-3">
@@ -89,7 +97,7 @@
 
     </div>
 
-	<div class="overflow-auto">
+	<div class="overflow-auto" style="height: 500px;">
 		<div id="restaurantList">
 
     {% include "find_business/businesses_list.html" %}
@@ -97,12 +105,12 @@
 		</div>
 	</div>
    </div>
+   		<!--map api stuff -->
+	   <div id="map">
 	  </div>
-	<div class="col-4" id="map-row" style="height:100%;width:100%">
-	  <div id="map">
-	</div>
+ </div>
 
-    </div>
+ </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
