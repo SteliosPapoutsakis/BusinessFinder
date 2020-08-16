@@ -105,21 +105,20 @@ function queryBusiness() {
 function queryLocations() {
 	
 
-	let names = [];
-	 $(".b-name").each((index, element) => {
-	 	names.push(element.textContent);
+	let names =[]
+	$('.b-name').each((index, ele) => {
+		names.push(ele.textContent);
 	});
 
-	console.log(names);
-
 	let query = {
-		'names': names 
+		'names': names.join(',') 
 	};
+
 	
 	$.ajax({
 		url: '/find_business/locations_query',
 		type: 'POST',
-		dataType: 'json',
+		dataType: 'text',
 		headers: {
 			'X-CSRFToken': csrftoken,
 		},
