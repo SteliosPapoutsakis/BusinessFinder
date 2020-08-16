@@ -33,6 +33,7 @@ function queryBusiness(queryParams) {
 			'X-CSRFToken': csrftoken,
 		},
 		success: updateBusinessList,
+
 		crossDomain: false,
 		data: test,
 	})
