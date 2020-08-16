@@ -96,12 +96,14 @@ def locations_query(request):
     locations = []
     if request.method == 'POST':
         print(request.POST)
-        names = request.POST.get('names[]')
+        names = request.POST.get('names').split(",")
         for companyName in names:
-            companies = Company.objects.filter(name=companyName)
-            if companies.count() != 0:
-                comp = companies[0]
-                locations.append((comp.locationLat, complocationLon))
+            company = Company.objects.get(name=companyName)
+            if company:
+                locations.append((
+                    company.coordinatesLat, 
+                    company.coordinatesLon)
+                )
             else:
                 locations.append((45.0, -122.0))
     print(locations)
