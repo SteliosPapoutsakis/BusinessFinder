@@ -57,7 +57,6 @@ def business_query(request):
                 (Q(coordinatesLat__lte=lon_max) |
                 Q(coordinateLat__gte=lon_min)))
 
-
         return ''
     else:
         raise Http404()
