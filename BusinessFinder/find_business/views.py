@@ -45,18 +45,29 @@ def business_query(request):
             mytype = CompanyTypes[query_dict['type']]
             companies = companies.filter(type=mytype)
         print('c')
-        if (valid_dict['within'] & query_dict['within'] > 0):
-            dist = query_dict['within']/COORDINATE_TO_MILES
-            lat_max = query_dict['lat'] + dist
-            lat_min = query_dict['lat'] - dist
-            lon_max = query_dict['lon'] + dist
-            lon_min = query_dict['lon'] - dist
+        if (valid_dict['within'] & (query_dict['within'] != 0)):
+            print('d')
+            dist = float(query_dict['within'])/COORDINATE_TO_MILES
+            lat = float(query_dict['lat'])
+            lon = float(query_dict['lon'])
+            lat_max = lat + dist
+            lat_min = lat - dist
+            lon_max = lon + dist
+            lon_min = lon - dist
+            print('e')
             companies = companies.filter(
                 (Q(coordinatesLat__lte=lat_max) |
                 Q(coordinatesLat__gte=lat_min)) &
                 (Q(coordinatesLat__lte=lon_max) |
-                Q(coordinateLat__gte=lon_min)))
+                Q(coordinatesLat__gte=lon_min)))
 
-        return ''
+        print(companies.all())
+
+        companies_dict = {
+            'companies': companies.all()
+        }
+
+        return render(request, 'find_business/businesses_list.html', companies_dict)
+
     else:
         raise Http404()

@@ -51,7 +51,7 @@ function queryBusiness() {
 		},
 		// on success, replace new html list
 		success: (data) => {
-		
+			console.log(data)
 		},
 		error: (jqXHR, textStatus,errorThrown ) => {
 			alert('Error: '+errorThrown+'\nStatus:'+jqXHR.status);
