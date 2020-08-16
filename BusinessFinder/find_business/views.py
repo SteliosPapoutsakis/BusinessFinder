@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, Http404
 from django.template import loader
 
 
@@ -13,5 +13,10 @@ def business_query(request):
     '''
     returns result from client side query
     '''
-    data = {"test": "hello"}
-    return JsonResponse(data)
+
+    if request.method == 'POST':
+        print(request.POST)
+        data = {"test": "hello"}
+        return JsonResponse(data)
+    else:
+        raise Http404()
