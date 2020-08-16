@@ -17,20 +17,21 @@
     <div class="container-fluid">
 
       <div class="jumbotron text-center">
-        <h1>Welcome to Business Finder!</h1>
+        <h1>Welcome to Safe Business Finder!</h1>
       </div>
 
       <div class="row">
 
         <div class="col-lg-3" >
           <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <input class="form-control mr-sm-2" type="search" id="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" id="searchButton" type="submit">Search</button>
           </form>
         </div>
 
         <div class="col-lg-2" >
-          <select class="custom-select">
+          <select class="custom-select" id="type">
+            <option>Any Type</option>
             <option value="RESTAURANT">Restaurant</option>
             <option value="RECREATION">Recreation</option>
             <option value="GOODS">Goods</option>
@@ -38,19 +39,47 @@
         </div>
 
         <div class="col-lg-2" >
-          <select class="custom-select">
-            <option value="Within5">Within 5 Miles</option>
-            <option value="Within10">Within 10 Miles</option>
-            <option value="Within15">Within 15 Miles</option>
+          <select class="custom-select" id="within">
+			      <option value="0">Any Range</option>
+            <option value="5">Within 5 Miles</option>
+            <option value="10">Within 10 Miles</option>
+            <option value="15">Within 15 Miles</option>
           </select>
       </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-lg-1">
+        <h5>Name</h5> <!-- Name of businesses -->
+      </div>
+
+      <div class="col-lg-2">
+        <h5>Address</h5> <!-- Address of businesses -->
+      </div>
+
+      <div class="col-lg-1"> <!-- Hours of businesses -->
+        <h5>Hours of Operation</h5>
+      </div>
+
+      <div class="col-lg-4">
+        <h5>Description</h5> <!-- Description of businesses -->
+      </div>
+
+      <div class="col-lg-1"> <!-- Rating of businesses -->
+        <h5>Ratings</h5>
+      </div>
+
+      <div class="col-lg-3">
+        <h5>Safe Activities</h5> <!-- Safety Options of businesses  WHAT IS THIS ACTUALLY CALLED-->
+      </div>
+
     </div>
 
     {% include "find_business/businesses_list.html" %}
 
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
   </body>
