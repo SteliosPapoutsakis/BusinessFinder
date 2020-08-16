@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, Http404
 from django.template import loader
 
+from .models import CompanyTypes, Company, Activity
 
 
 def index(request):
