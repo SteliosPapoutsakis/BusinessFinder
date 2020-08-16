@@ -94,7 +94,7 @@ def locations_query(request):
     locations = []
     if request.method == 'POST':
         print(request.POST)
-        names = request.POST.get('names')
+        names = request.POST.get('names[]')
         for companyName in names:
             companies = Company.objects.filter(name=companyName)
             if companies.count() != 0:
