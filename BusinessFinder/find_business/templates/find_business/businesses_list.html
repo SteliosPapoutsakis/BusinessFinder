@@ -1,6 +1,7 @@
-<div class="">
+<div class="overflow-auto">
 
 {% for business in companies %}
+<div class="well">
   <div class="row">
 
     <div class="col-lg-1">
@@ -24,9 +25,12 @@
     </div>
 
     <div class="col-lg-3">
-      <p>N/A</p> <!-- Safety Options of businesses  WHAT IS THIS ACTUALLY CALLED-->
+      <p>{{business.activities}}</p> <!-- Safety Options of businesses  WHAT IS THIS ACTUALLY CALLED-->
     </div>
 
   </div>
+</div>
+
 {% endfor %}
+
 </div>
