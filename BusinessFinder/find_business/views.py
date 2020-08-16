@@ -20,7 +20,7 @@ def business_query(request):
     '''
     returns result from client side query
     '''
-
+    print(request)
     if request.method == 'POST':
         print(request.POST)
         query_dict = {}
@@ -35,8 +35,8 @@ def business_query(request):
                 valid_dict[val] = False
 
         companies = Company.objects.filter(
-            Q(name__contains(query_dict['search'])) |
-            Q(description__contains(query_dict['search']))
+            Q(name__contains=query_dict['search']) |
+            Q(description__contains=query_dict['search'])
         )
         if (valid_dict['type']):
             companies = companies.filter(type=query_dict['type'])
@@ -51,10 +51,8 @@ def business_query(request):
                 (Q(coordinatesLat__lte=lat_max) |
                 Q(coordinatesLat__gte=lat_min)) &
                 (Q(coordinatesLat__lte=lon_max) |
-                Q(coordinateLat__gte=lon_min));
-            )
+                Q(coordinateLat__gte=lon_min)))
 
-        print companies
 
         return ''
     else:
