@@ -7,13 +7,15 @@ from django.db.models import Q
 from .models import CompanyTypes, Company
 
 COORDINATE_TO_MILES = 75.0
+PORTLAND_LAT = 45.5732
+PORTLAND_LON = -122.7276
 
 def index(request):
     companies = Company.objects.all()
     companies_dict = {
         'companies': companies,
-        'lat': 45.5732,
-        'lon': -122.7276
+        'lat': PORTLAND_LAT,
+        'lon': PORTLAND_LON
     }
     return render(request, 'find_business/index.html', companies_dict)
 # Create your views here.
