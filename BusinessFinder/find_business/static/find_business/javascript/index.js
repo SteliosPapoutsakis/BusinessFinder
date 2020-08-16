@@ -13,17 +13,17 @@ $(document).ready(() => {
 					navigator.geolocation.getCurrentPosition((position) => {
 						lon = position.coords.longitude;
 						lat = position.coords.latitude;
-						alert(lon +' '+lat);
 					});
 				} else {
 					alert('Geo location is not support by this browser');
 				}
 		}
 	});
-
-	queryBusiness();
+	
+	$('#searchButton').click(() => {
+		queryBusiness();
+	});
 });
-
 
 	
 
@@ -34,18 +34,14 @@ $(document).ready(() => {
  * @output (list), list of matching json objects
  */
 function queryBusiness() {
- 	let type = 	$('#type').val();
-	let search = $('#search').val();
-	console.log(type+' '+search);
-	let test = {
-		"type": "resturant",
-		"search": "Mario's Pizza",
+	let query = {
+		"type": $('#type').val(),
+		"search": $('#search').val(),
 		"lat": (lon)?lon:0.0,
 		"lon": (lat)?lat:0.0,
 		"within": (lon || lat)?$('#within').val():0
 	};
 
-	
 	$.ajax({
 		url: '/find_business/business_query',
 		type: 'POST',
@@ -61,7 +57,7 @@ function queryBusiness() {
 			alert('Error: '+errorThrown+'\nStatus:'+jqXHR.status);
 		},
 		crossDomain: false,
-		data: test,
+		data: query,
 	});
 }
 
