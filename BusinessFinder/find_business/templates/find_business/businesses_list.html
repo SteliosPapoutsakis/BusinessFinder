@@ -1,0 +1,32 @@
+<div class="">
+
+{% for business in companies %}
+  <div class="row">
+
+    <div class="col-lg-1">
+      <p>{{business.name}}</p> <!-- Name of businesses -->
+    </div>
+
+    <div class="col-lg-2">
+      <p>{{business.address}}</p> <!-- Address of businesses -->
+    </div>
+
+    <div class="col-lg-1"> <!-- Hours of businesses -->
+      <p>{{business.start_time}} - {{business.end_time}}</p>
+    </div>
+
+    <div class="col-lg-4">
+      <p>{{business.description}}</p> <!-- Description of businesses -->
+    </div>
+
+    <div class="col-lg-1"> <!-- Rating of businesses -->
+      <p>{{business.rating}}</p>
+    </div>
+
+    <div class="col-lg-3">
+      <p>N/A</p> <!-- Safety Options of businesses  WHAT IS THIS ACTUALLY CALLED-->
+    </div>
+
+  </div>
+{% endfor %}
+</div>
