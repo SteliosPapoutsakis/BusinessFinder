@@ -42,6 +42,10 @@ $(document).ready(() => {
 	$('#searchButton').click(() => {
 		queryBusiness();
 	});
+	
+	//query to set locations on map
+	queryLocations();
+
 });
 
 "use strict";
@@ -54,7 +58,7 @@ function initMap() {
       lat: 45.5732,
       lng: -122.7276
     },
-    zoom: 6
+    zoom: 8
   });
 }
 
@@ -84,6 +88,9 @@ function queryBusiness() {
 		success: (data) => {
 			$('#restaurantList').empty();
 			$('#restaurantList').append(data);
+
+			//query to set locations on map
+			queryLocations();
 		},
 		error: (jqXHR, textStatus,errorThrown ) => {
 			alert('Error: '+errorThrown+'\nStatus:'+jqXHR.status);
@@ -91,5 +98,35 @@ function queryBusiness() {
 		crossDomain: false,
 		data: query,
 	});
+}
+
+function queryLocations() {
+	let names = $('.busniess-name').text();
+	console.log(names);
+
+	let query = {
+		'names': names 
+	}
+	
+	$.ajax({
+		url: '/find_business/locations_query',
+		type: 'POST',
+		dataType: 'json',
+		headers: {
+			'X-CSRFToken': csrftoken,
+		},
+		// on success, replace new html list
+		success: (data) => {
+			console.(data);
+
+
+		},
+		error: (jqXHR, textStatus,errorThrown ) => {
+			alert('Error: '+errorThrown+'\nStatus:'+jqXHR.status);
+		},
+		crossDomain: false,
+		data: query,
+	});
+
 }
 
