@@ -13,13 +13,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCn2cy1d-VC1wYYTF-8OYoCbdnrtuOzKjs&callback=initMap&libraries=&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCn2cy1d-VC1wYYTF-8OYoCbdnrtuOzKjs
+&callback=initMap&libraries=&v=weekly"
       defer
     ></script>
-
  </head>
   <body>
-    <div class="container-fluid">
+    <div class="container-fluid" style="width:100%;">
 
       <div class="jumbotron text-center">
         <h1>Welcome to Safe Business Finder!</h1>
@@ -55,7 +55,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" id="searchButton">Search</button>
       </div>
     </div>
-
+   <div class="business-list">
     <div class="row">
 
       <div class="col-lg-1">
@@ -91,7 +91,10 @@
 
 		</div>
 	</div>
-	<div id="map" style="display:none;">
+   </div>
+	<div class="row" id="map-row" style="display:none;height:400px;width:100%">
+	  <div id="map">
+	</div>
 
     </div>
 
