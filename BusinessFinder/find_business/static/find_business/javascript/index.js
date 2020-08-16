@@ -26,18 +26,6 @@ $(document).ready(function() {
 		}
 	});
 
-	// set toggle for map button
-	$('#mapToggle').click(() => {
-		if ($('#mapToggle').text() == 'Map') {
-			$('#map').css('display','block');
-			$('.business-list').css('display', 'none');
-			$('#mapToggle').text('List');
-		} else if ($('#mapToggle').text() == 'List') {
-			$('#map').css('display','none');
-			$('.business-list').css('display', 'block');
-			$('#mapToggle').text('Map');
-		}
-	});
 	
 	$('#searchButton').click(() => {
 		queryBusiness();
@@ -51,7 +39,7 @@ $(document).ready(function() {
 "use strict";
 
 let map;
-
+let markers=[];
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: {
@@ -101,9 +89,16 @@ function queryBusiness() {
 	});
 }
 
-function queryLocations() {
-	
 
+function clearMarkers() {
+	for(let i=0; i < markers.length; i++) {
+		markers[i].setMap(null);
+	}
+}
+
+function queryLocations() {
+
+	clearMarkers();
 	let names =[]
 	$('.b-name').each((index, ele) => {
 		names.push(ele.textContent);
@@ -123,16 +118,17 @@ function queryLocations() {
 		},
 //		 on success, replace new html list
 		success: (data) => {
+			data=JSON.parse(data)
 			console.log(data);
 			for (let i =0; i < names.length; i++) {
-				new google.maps.Marker({
+			markers.push(new google.maps.Marker({
 					position: {
-						lat: 74,
-						lon: -125
+						lat: data[i][0],
+						lng: data[i][1]
 					},
 					label: names[i],
 					map:map
-				});
+				}));
 			}
 
 
