@@ -58,7 +58,7 @@ function initMap() {
       lat: 45.5732,
       lng: -122.7276
     },
-    zoom: 8
+    zoom: 10
   });
 }
 
@@ -89,6 +89,7 @@ function queryBusiness() {
 			$('#restaurantList').empty();
 			$('#restaurantList').append(data);
 
+			
 			//query to set locations on map
 			queryLocations();
 		},
@@ -101,12 +102,16 @@ function queryBusiness() {
 }
 
 function queryLocations() {
-	let names = $('.busniess-name').text();
+	let names = [];
+	$('.busniess-name').each((index) => {
+		names.push($(this).text());
+	});
+
 	console.log(names);
 
 	let query = {
 		'names': names 
-	}
+	};
 	
 	$.ajax({
 		url: '/find_business/locations_query',
@@ -115,9 +120,19 @@ function queryLocations() {
 		headers: {
 			'X-CSRFToken': csrftoken,
 		},
-		// on success, replace new html list
+//		 on success, replace new html list
 		success: (data) => {
 			console.log(data);
+			for (let i =0; i < names.length; i++) {
+				new google.maps.Marker({
+					position: {
+						lat: data[i][0],
+						lon: data[i][1]
+					},
+					label: names[i],
+					map:map
+				});
+			}
 
 
 		},
@@ -127,6 +142,6 @@ function queryLocations() {
 		crossDomain: false,
 		data: query,
 	});
-
 }
+
 
