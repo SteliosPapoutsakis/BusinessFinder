@@ -29,18 +29,22 @@ def business_query(request):
             val = request.POST.get(company_attr)
         
             if val:
-                valid_dict[val] = True
+                valid_dict[company_attr] = True
                 query_dict[company_attr] = val
             else:
-                valid_dict[val] = False
-
-        companies = Company.objects.filter(
-            Q(name__contains=query_dict['search']) |
-            Q(description__contains=query_dict['search'])
-        )
+                valid_dict[company_attr] = False
+        companies = Company.objects.all()
+        print('a')
+        if (valid_dict['search']):
+            companies = Company.objects.filter(
+                Q(name__contains=query_dict['search']) |
+                Q(description__contains=query_dict['search'])
+            )
+        print('b')
         if (valid_dict['type']):
-            companies = companies.filter(type=query_dict['type'])
-
+            mytype = CompanyTypes[query_dict['type']]
+            companies = companies.filter(type=mytype)
+        print('c')
         if (valid_dict['within'] & query_dict['within'] > 0):
             dist = query_dict['within']/COORDINATE_TO_MILES
             lat_max = query_dict['lat'] + dist
