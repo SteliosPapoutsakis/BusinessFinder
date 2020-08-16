@@ -20,8 +20,8 @@ $(document).ready(() => {
 function queryBusiness(queryParams) {
 	let test = {
 		"type": "resturant",
-		"Title": "Mario's Pizza",
-		"Address": "8 Lane 7897",
+		"title": "Mario's Pizza",
+		"address": "8 Lane 7897",
 	};
 
 	
@@ -33,9 +33,10 @@ function queryBusiness(queryParams) {
 			'X-CSRFToken': csrftoken,
 		},
 		success: updateBusinessList,
+
 		crossDomain: false,
 		data: test,
-	})
+	});
 }
 
 /**
