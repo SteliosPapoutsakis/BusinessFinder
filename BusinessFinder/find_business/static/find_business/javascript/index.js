@@ -123,15 +123,15 @@ function queryLocations() {
 //		 on success, replace new html list
 		success: (data) => {
 			console.log(data);
-			for (int i =0; i < names.length; i++) {
-//				new google.maps.Marker({
-//					position: {
-//						lat: data[i][0],
-//						lon: data[i][1]
-//					},
-//					label: names[i],
-//					map:map
-//				});
+			for (let i =0; i < names.length; i++) {
+				new google.maps.Marker({
+					position: {
+						lat: data[i][0],
+						lon: data[i][1]
+					},
+					label: names[i],
+					map:map
+				});
 			}
 
 
