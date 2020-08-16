@@ -2,30 +2,30 @@
 // Front end Javascript for index.html file
 // @author Stelios Papoutsakis
 
+let lon,lat;
 
 $(document).ready(() => {
-	$('#within').click(() => {
-		if (!lat || !lon) {
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition((position) => {
 
-				);
-			} else {
-				alert('Geo location is not support by this browser');
-			}
-		});
-	queryBusiness('');
+	// set geo location on first click if withint
+	$('#within').click(() => {
+		if (!lon || !lat) {
+			if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition((position) => {
+						lon = position.coords.longitude;
+						lat = position.coords.latitude;
+						alert(lon +' '+lat);
+					});
+				} else {
+					alert('Geo location is not support by this browser');
+				}
+		}
+	});
+
+	queryBusiness();
 });
 
 
-function geQueryParams() {
-	params = {
-		"type": $('#type').text()
-	}
-
-	return params;
-		
-
+	
 
 /**
  * Querys the backend for matching business
@@ -33,13 +33,16 @@ function geQueryParams() {
  * @input (json), paramters for query
  * @output (list), list of matching json objects
  */
-function queryBusiness(queryParams) {
+function queryBusiness() {
+ 	let type = 	$('#type').val();
+	let search = $('#search').val();
+	console.log(type+' '+search);
 	let test = {
 		"type": "resturant",
-		"title": "Mario's Pizza",
-		"lat": 0.0,
-		"lon": 0.0,
-		"within": 3
+		"search": "Mario's Pizza",
+		"lat": (lon)?lon:0.0,
+		"lon": (lat)?lat:0.0,
+		"within": (lon || lat)?$('#within').val():0
 	};
 
 	
@@ -62,5 +65,3 @@ function queryBusiness(queryParams) {
 	});
 }
 
-/**
- *
