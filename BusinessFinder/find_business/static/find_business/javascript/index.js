@@ -4,8 +4,8 @@
 
 let lon,lat;
 
-$(document).ready(() => {
-
+$(document).ready(function() {
+	
 	// set geo location on first click if withint
 	$('#within').click(() => {
 		if (!lon || !lat) {
@@ -42,7 +42,8 @@ $(document).ready(() => {
 	$('#searchButton').click(() => {
 		queryBusiness();
 	});
-	
+
+	console.log('here');
 	//query to set locations on map
 	queryLocations();
 
@@ -93,18 +94,20 @@ function queryBusiness() {
 			//query to set locations on map
 			queryLocations();
 		},
-		error: (jqXHR, textStatus,errorThrown ) => {
-			alert('Error: '+errorThrown+'\nStatus:'+jqXHR.status);
-		},
+	//	error: (jqXHR, textStatus,errorThrown ) => {
+	//		alert('Error: '+errorThrown+'\nStatus:'+jqXHR.status);
+	//	},
 		crossDomain: false,
 		data: query,
 	});
 }
 
 function queryLocations() {
+	
+
 	let names = [];
-	$('.busniess-name').each((index) => {
-		names.push($(this).text());
+	 $(".b-name").each((index, element) => {
+	 	names.push(element.textContent);
 	});
 
 	console.log(names);
@@ -136,9 +139,9 @@ function queryLocations() {
 
 
 		},
-		error: (jqXHR, textStatus,errorThrown ) => {
-			alert('Error: '+errorThrown+'\nStatus:'+jqXHR.status);
-		},
+//		error: (jqXHR, textStatus,errorThrown ) => {
+//			alert('Error: '+errorThrown+'\nStatus:'+jqXHR.status);
+//		},
 		crossDomain: false,
 		data: query,
 	});
