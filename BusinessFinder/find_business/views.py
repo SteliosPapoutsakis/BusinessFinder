@@ -6,10 +6,16 @@ from django.db.models import Q
 
 from .models import CompanyTypes, Company
 
+#Constants that help with determining a default location
+#and doing a very rough calculation from Latitude and
+#longiture degrees to miles
 COORDINATE_TO_MILES = 75.0
 PORTLAND_LAT = 45.5732
 PORTLAND_LON = -122.7276
 
+# Send the default home page,
+# before any location or search parameters
+# are given
 def index(request):
     companies = Company.objects.all()
     companies_dict = {
@@ -18,8 +24,11 @@ def index(request):
         'lon': PORTLAND_LON
     }
     return render(request, 'find_business/index.html', companies_dict)
-# Create your views here.
 
+# Queries for a list of businesses based on certain
+# search parameters, these parameters include the
+# company type, a search string and a within distance (mi)
+# as well as the users current location
 def business_query(request):
     '''
     returns result from client side query
@@ -77,3 +86,21 @@ def business_query(request):
 
     else:
         raise Http404()
+
+# Queries the database for all company names that are listed
+# and returns a list of tuples decribing the location of each company
+# that was requested
+def locations_query(request):
+    locations = []
+    if request.method == 'POST':
+        print(request.POST)
+        names = request.POST.get('names')
+        for companyName in names:
+            companies = Company.objects.filter(name=companyName)
+            if companies.count() != 0:
+                comp = companies[0]
+                locations.append((comp.locationLat, complocationLon))
+            else:
+                locations.append((45.0, -122.0))
+    print(locations)
+    return JsonResponse(locations, safe=False)
