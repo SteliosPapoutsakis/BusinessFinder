@@ -29,34 +29,28 @@
           </form>
         </div>
 
-        <div class="col-lg-1" >
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Business Type
-              <span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#">Restaurant</a></li>
-                <li><a href="#">Recreation</a></li>
-                <li><a href="#">Goods</a></li>
-              </ul>
-          </div>
+        <div class="col-lg-2" >
+          <select class="custom-select">
+            <option value="RESTAURANT">Restaurant</option>
+            <option value="RECREATION">Recreation</option>
+            <option value="GOODS">Goods</option>
+          </select>
         </div>
 
-        <div class="col-lg-8" >
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Location
-              <span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#">Within 5 miles</a></li>
-                <li><a href="#">Within 10 miles</a></li>
-                <li><a href="#">Within 15 miles</a></li>
-              </ul>
-          </div>
-        </div>
+        <div class="col-lg-2" >
+          <select class="custom-select">
+            <option value="Within5">Within 5 Miles</option>
+            <option value="Within10">Within 10 Miles</option>
+            <option value="Within15">Within 15 Miles</option>
+          </select>
+      </div>
     </div>
+
+    {% include "find_business/businesses_list.html" %}
 
     </div>
 
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
   </body>

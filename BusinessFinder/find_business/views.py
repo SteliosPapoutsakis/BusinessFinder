@@ -1,11 +1,18 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, Http404
 from django.template import loader
-from find_business.models import Company
+
 from django.db.models import Q
 
+from .models import CompanyTypes, Company
+
+
 def index(request):
-    return render(request, 'find_business/index.html')
+    companies = Company.objects.all()
+    companies_dict = {
+        'companies': companies
+    }
+    return render(request, 'find_business/index.html', companies_dict)
 # Create your views here.
 
 def business_query(request):
@@ -20,10 +27,8 @@ def business_query(request):
             val = request.POST.get(company_attr)
             if val:
                 query_dict[company_attr] = val
-                
-        #companies = Company.objects.filter(query_dict)
-        #companies = Company.objects.filter(Q(name))
-        #companies = Company.
+
+        companies = ""#Company.objects.filter(query_dict)
 
         return JsonResponse('')
     else:
