@@ -23,6 +23,7 @@ function queryBusiness(queryParams) {
 		"Title": "Mario's Pizza",
 		"Address": "8 Lane 7897",
 	};
+
 	
 	$.ajax({
 		url: '/find_business/business_query',
@@ -31,9 +32,10 @@ function queryBusiness(queryParams) {
 		headers: {
 			'X-CSRFToken': csrftoken,
 		},
+		success: updateBusinessList,
 		crossDomain: false,
 		data: test,
-	}).then((response => { console.log('ji'); }));
+	})
 }
 
 /**
