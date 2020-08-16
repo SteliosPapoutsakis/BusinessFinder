@@ -19,13 +19,38 @@ $(document).ready(() => {
 				}
 		}
 	});
+
+	// set toggle for map button
+	$('#mapToggle').click(() => {
+		if ($('#mapToggle').text() == 'Map') {
+			$('#map-row').css('display','block');
+			$('.business-list').css('display', 'none');
+			$('#mapToggle').text('List');
+		} else if ($('#mapToggle').text() == 'List') {
+			$('#map-row').css('display','none');
+			$('.business-list').css('display', 'block');
+			$('#mapToggle').text('Map');
+		}
+	});
 	
 	$('#searchButton').click(() => {
 		queryBusiness();
 	});
 });
 
-	
+"use strict";
+
+let map;
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: {
+      lat: -34.397,
+      lng: 150.644
+    },
+    zoom: 5
+  });
+}
 
 /**
  * Querys the backend for matching business
@@ -37,8 +62,8 @@ function queryBusiness() {
 	let query = {
 		"type": $('#type').val(),
 		"search": $('#search').val(),
-		"lat": (lon)?lon:0.0,
-		"lon": (lat)?lat:0.0,
+		"lat": (lat)?lat:0.0,
+		"lon": (lon)?lon:0.0,
 		"within": (lon || lat)?$('#within').val():0
 	};
 
