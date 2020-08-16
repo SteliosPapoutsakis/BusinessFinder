@@ -2,11 +2,15 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, Http404
 from django.template import loader
 
-from .models import CompanyTypes, Company, Activity
+from .models import CompanyTypes, Company
 
 
 def index(request):
-    return render(request, 'find_business/index.html')
+    companies = Company.objects.all()
+    companies_dict = {
+        'companies': companies
+    }
+    return render(request, 'find_business/index.html', companies_dict)
 # Create your views here.
 
 def business_query(request):
