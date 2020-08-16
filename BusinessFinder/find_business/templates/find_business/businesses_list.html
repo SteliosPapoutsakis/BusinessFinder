@@ -1,6 +1,11 @@
+
  {% for business in companies %}
-  <div class="well">
+
+ {% if forloop.counter|divisibleby:2 %} 
+    <div class="row" style="background-color: lightcyan;">
+ {% else %}
     <div class="row">
+  {% endif %}
 
       <div class="col-lg-1 busniess-name">
         <p>{{business.name}}</p> <!-- Name of businesses -->
@@ -33,7 +38,7 @@
       </div>
 
     </div>
-  </div>
+  
 
   {% endfor %}
 

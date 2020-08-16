@@ -48,9 +48,11 @@ def business_query(request):
         companies = Company.objects.all()
 
         if (valid_dict['search']):
+            search = query_dict['search']
             companies = Company.objects.filter(
-                Q(name__contains=query_dict['search']) |
-                Q(description__contains=query_dict['search'])
+                Q(name__icontains=search) |
+                Q(description__icontains=search) |
+                Q(activities__icontains=search)
             )
 
         if (valid_dict['type']):
