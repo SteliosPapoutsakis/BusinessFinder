@@ -51,10 +51,10 @@ def business_query(request):
                 (Q(coordinatesLat__lte=lat_max) |
                 Q(coordinatesLat__gte=lat_min)) &
                 (Q(coordinatesLat__lte=lon_max) |
-                Q(coordinateLat__gte=lon_min));
+                Q(coordinateLat__gte=lon_min))
             )
 
-        print companies
+        print(companies)
 
         return ''
     else:
