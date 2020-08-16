@@ -1,14 +1,31 @@
 //
 // Front end Javascript for index.html file
 // @author Stelios Papoutsakis
-//
+
+let lon,lat;
+
 $(document).ready(() => {
-	console.log('hello');
-	queryBusiness('');
+
+	// set geo location on first click if withint
+	$('#within').click(() => {
+		if (!lon || !lat) {
+			if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition((position) => {
+						lon = position.coords.longitude;
+						lat = position.coords.latitude;
+						alert(lon +' '+lat);
+					});
+				} else {
+					alert('Geo location is not support by this browser');
+				}
+		}
+	});
+
+	queryBusiness();
 });
 
 
-
+	
 
 /**
  * Querys the backend for matching business
@@ -16,36 +33,35 @@ $(document).ready(() => {
  * @input (json), paramters for query
  * @output (list), list of matching json objects
  */
-
-function queryBusiness(queryParams) {
+function queryBusiness() {
+ 	let type = 	$('#type').val();
+	let search = $('#search').val();
+	console.log(type+' '+search);
 	let test = {
 		"type": "resturant",
-		"title": "Mario's Pizza",
-		"address": "8 Lane 7897",
+		"search": "Mario's Pizza",
+		"lat": (lon)?lon:0.0,
+		"lon": (lat)?lat:0.0,
+		"within": (lon || lat)?$('#within').val():0
 	};
 
 	
 	$.ajax({
 		url: '/find_business/business_query',
 		type: 'POST',
-		dataType: 'json',
+		dataType: 'html',
 		headers: {
 			'X-CSRFToken': csrftoken,
 		},
-		success: updateBusinessList,
-
+		// on success, replace new html list
+		success: (data) => {
+		
+		},
+		error: (jqXHR, textStatus,errorThrown ) => {
+			alert('Error: '+errorThrown+'\nStatus:'+jqXHR.status);
+		},
 		crossDomain: false,
 		data: test,
 	});
-}
-
-/**
- * updates the client side based on a new list of business
- *
- * @input (json), list of new business
- */
-
-function updateBusinessList(listOfBusiness) {
-	console.log(listOfBusiness);
 }
 
