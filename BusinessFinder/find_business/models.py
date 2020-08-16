@@ -36,20 +36,22 @@ class Company(models.Model):
         validators=(
             MinValueValidator(0.0), MaxValueValidator(5.0)
         )
-    )
-    
+    )    
+    activities = models.TextField(default='Wears Facemasks',
+        max_length=1024)
+
     def __str__(self):
         return self.name
 
     def get_company_type_label(self):
         return CompanyTypes(self.type).name.title()
 
-class Activity(models.Model):
-    title = models.CharField(default='Invalid Name',
-        max_length=100)
-    description = models.TextField(default='',
-        max_length=500)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+#class Activity(models.Model):
+#    title = models.CharField(default='Invalid Name',
+#        max_length=100)
+#    description = models.TextField(default='',
+#        max_length=500)
+#    company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.title
+#    def __str__(self):
+#        return self.title
